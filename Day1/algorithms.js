@@ -32,12 +32,21 @@ const printStarSeries = function (num, count) {
 
 //4-
 
-const reverse = function (str) {
+const reverse1 = function (str) {
     let reversed = ''
     for (i = str.length - 1; i >= 0; i--) {
         reversed += str[i]
     }
     return reversed
+}
+
+const reverse2 = function (str) {
+    let reversed = []
+    for (i = str.length - 1; i >= Math.floor((str.length - 1) / 2); i--) {
+        reversed[i] = str[str.length - 1 - i]
+        reversed[str.length - 1 - i] = str[i]
+    }
+    return reversed.join('')
 }
 
 //5-
@@ -88,6 +97,7 @@ const decrypt = function (str) {
 
 const jumble = function (arr1, arr2) {
     let jumbledArr = []
+    // let newArr = [...arr1, ...arr2]
     let totalItemsNum = arr1.length + arr2.length;
     while (totalItemsNum > 0) {
         if (Math.random() >= 0.5) {
@@ -106,16 +116,18 @@ const jumble = function (arr1, arr2) {
     return jumbledArr
 }
 
+// console.log(jumble([1,2,3,4],[8,6,5,9]))
+
 //9-
 
 const getLetter = function (rawDist) {
-    const letters = []
-    const distributions = []
+    const letters = Object.keys(rawDist)
+    const distributions = Object.values(rawDist)
     for (let letter in rawDist) {
         distributions.push(rawDist[letter])
         letters.push(letter)
     }
-    ranges = []
+    const ranges = []
     ranges[0] = distributions[0]
     for (let i = 1; i < distributions.length; i++) {
         ranges[i] = ranges[i - 1] + distributions[i]
@@ -140,7 +152,7 @@ const test = function(numOfRuns, rawDist){
     }
     console.log(counter)
     for (let letter in counter) {
-        console.log(`We got ${letter} ${(counter[letter] / numOfRuns) * 100}% of the times`)
+        console.log(`We got ${letter} ${((counter[letter] / numOfRuns) * 100).toFixed(2)}% of the times`)
     }
 }
 
@@ -150,3 +162,5 @@ const rawDist = {
     C: 10,
     D: 20
 }
+
+test(1000000, rawDist)

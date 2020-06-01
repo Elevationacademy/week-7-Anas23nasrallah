@@ -150,7 +150,6 @@ class TicTacToe extends Matrix {
     }
 
     play(r, c, player) {
-        console.log(player, this.currentPlayer)
         if(player === this.currentPlayer){
             console.log('It is not allowed to play twice in a row')
             return
